@@ -23,7 +23,7 @@
         , name, parentId, depPath, enabled, isParent
     </sql>
     <!-- 删除部门-->
-    <select id="deleteDep" statementType="CALLABLE">
+    <select id="deleteDep" statementType="CALLABLE" resultType="com.hong.server.pojo.RespBean">
         call deleteDep(
             #{id,mode=IN,jdbcType=INTEGER},
             #{result,mode=OUT,jdbcType=INTEGER}
@@ -33,7 +33,7 @@
 
 
     <!--添加部门    statementType=CALLABLE 表示执行存储过程-->
-    <select id="addDep" statementType="CALLABLE">
+    <select id="addDep" statementType="CALLABLE" resultType="com.hong.server.pojo.RespBean">
         call addDep( #{name,mode=IN,jdbcType=VARCHAR},
             #{parentId,mode=IN,jdbcType=INTEGER},
             #{enabled,mode=IN,jdbcType=BOOLEAN},

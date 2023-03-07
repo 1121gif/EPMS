@@ -20,26 +20,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * <p>
- *
- *
- *
- *
- *
- *
- *
- * </p>
- *
  * @author 黄海宏
  * @since 2023-01-09
  */
 @Data   //  生成getter setter 方法
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode()
 @Accessors(chain = true)
 @TableName("t_admin")
-@ApiModel(value="Admin对象", description="")
-public class Admin implements Serializable , UserDetails {
+@ApiModel(value = "Admin对象", description = "")
+public class Admin implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -82,9 +72,9 @@ public class Admin implements Serializable , UserDetails {
     @Override
     @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities =roles
+        List<SimpleGrantedAuthority> authorities = roles
                 .stream()
-                .map(role->new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
 
         return authorities;
