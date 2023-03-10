@@ -4,7 +4,7 @@
       <el-tab-pane label="部门管理" name="DepMana"><dep-mana/></el-tab-pane>
       <el-tab-pane label="职位管理" name="PosMana"><pos-mana/></el-tab-pane>
       <el-tab-pane label="职称管理" name="JoblevelMana"><joblevel-mana/></el-tab-pane>
-      <el-tab-pane label="奖惩规则" name="EcMana"><ec-mana/></el-tab-pane>
+<!--      <el-tab-pane label="奖惩规则" name="EcMana"><ec-mana/></el-tab-pane>-->
       <el-tab-pane label="权限组" name="PermissMana"><permiss-mana/></el-tab-pane>
     </el-tabs>
   </div>
@@ -24,7 +24,8 @@ export default {
     }
   },
   components:{
-    DepMana,EcMana,JoblevelMana,PermissMana,PosMana
+  // ,EcMana
+    DepMana,JoblevelMana,PermissMana,PosMana
   }
 }
 </script>

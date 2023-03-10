@@ -18,7 +18,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
@@ -103,6 +105,12 @@ public class EmployeeController {
     @ApiOperation(value = "更新员工")
     @PutMapping("/")
     public RespBean updateEmp(@RequestBody Employee emp) {
+        //处理合同期限，保留两位小数
+        LocalDate beginContract = emp.getBeginContract();
+        LocalDate endContract = emp.getEndContract();
+        long days = beginContract.until(endContract, ChronoUnit.DAYS);
+        DecimalFormat df = new DecimalFormat("##.00");
+        emp.setContractTerm(Double.parseDouble(df.format(days / 365.00)));
         if (employeeService.updateById(emp)) {
             return RespBean.success("更新成功！");
         }

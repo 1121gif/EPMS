@@ -156,7 +156,7 @@
           :data="emps"
           stripe
           border
-          style="width: 100%">
+          style="width: 100%;">
 
         <el-table-column
             type="selection"
@@ -198,7 +198,7 @@
         </el-table-column>
         <el-table-column
             prop="nation.name"
-            width="50"
+            width="75"
             align="left"
             label="民族">
         </el-table-column>
@@ -317,8 +317,8 @@
             width="170"
             label="操作">
           <template slot-scope="scope">
+
             <el-button @click="showEditEmpView(scope.row)" style="padding: 12px;margin-right: 15px;margin-left: 15px" size="mini">编辑</el-button>
-<!--            <el-button style="padding: 3px" size="mini" type="primary">查看高级资料</el-button>-->
             <el-button @click="deleteEmp(scope.row)" style="padding: 12px" size="mini" type="danger">删除
             </el-button>
           </template>
@@ -586,7 +586,7 @@
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible=false">取 消</el-button>
+    <el-button @click="dialogVisible=false" >取 消</el-button>
     <el-button type="primary" @click="doAddEmp">确 定</el-button>
   </span>
     </el-dialog>
@@ -906,6 +906,10 @@ export default {
       this.importDataBtnText = '导入数据';
       this.importDataDisabled = false;
       this.initEmps();
+      this.$message({
+        type:"success",
+        message:"导入成功！"
+      })
     },
     onError() {
       this.importDataBtnicon = 'el-icon-upload2';
@@ -919,7 +923,26 @@ export default {
 
     },
     exportData() {
-      this.downloadRequest('/employee/basic/export');
+      this.$confirm('是否下载员工表, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.downloadRequest('/employee/basic/export').then(resp => {
+          if (!resp) {
+            this.$message({
+              type: 'success',
+              message: '正在下载...'
+            });
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消下载'
+        });
+      });
+      // this.downloadRequest('/employee/basic/export');
     },
 
     sizeChange(size) {

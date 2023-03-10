@@ -18,7 +18,7 @@
       </el-header>
       <el-container>
         <el-aside width="200px">
-          <el-menu router unique-opened :default-active="$route.path">
+          <el-menu router unique-opened :default-active="$route.path" >
             <el-submenu :index="index+''" v-for="(item,index) in routes" :key="index" v-if="!item.hidden">
               <template slot="title"><i :class="item.iconCls" style="color: #262626;margin-right: 5px"></i>
                 <span>{{ item.name }}</span>
@@ -152,7 +152,7 @@ export default {
   text-align: left;
   font-size: 30px;
   font-family: 华文楷体;
-  color: #409EFF;
+  color: #001529;
 }
 .homeRouterview{
   margin-top: 10px;
